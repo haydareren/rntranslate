@@ -3,26 +3,14 @@ import {View,Text} from "react-native";
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-function HomeScreen() {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Home!</Text>
-        </View>
-    );
-}
-
-function SettingsScreen() {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Settings!</Text>
-        </View>
-    );
-}
+import Cevir from "./views/cevir";
+import Translate from "./views/translate";
+import History from "./views/history";
+import TransleteContextProvider from '../src/context/TranslateContext'
 const Tab = createBottomTabNavigator();
 function App() {
    return(
-
+       <TransleteContextProvider>
       <NavigationContainer>
           <Tab.Navigator
               screenOptions={{
@@ -33,10 +21,12 @@ function App() {
                   },
               }}
           >
-              <Tab.Screen name="Home" component={HomeScreen} />
-              <Tab.Screen name="Settings" component={SettingsScreen} />
+              <Tab.Screen name="Tur->Ing" component={Cevir} />
+              <Tab.Screen name="Ing->Tur" component={Translate} />
+              <Tab.Screen name="History" component={History} />
           </Tab.Navigator>
       </NavigationContainer>
+       </TransleteContextProvider>
 
    )
 }
